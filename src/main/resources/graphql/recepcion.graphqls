@@ -1,0 +1,42 @@
+#import "entitypage.graphqls"
+
+enum TIPO_REGISTRO {
+  HOSPEDAJE
+  RESERVA
+}
+
+
+type Recepcion {
+  id: ID!
+  habitacion: Habitacion!
+  user: User!
+  paquete: Paquete
+  fechaEntrada: String
+  fechaSalida: String
+  adelanto: Float
+  descuento: Float
+  totalAPagar: Float
+  preferencias: String
+  observaciones: String
+  trxHash: String
+  tipo : String!
+  terminado:Boolean
+}
+
+
+
+
+
+
+extend type Query {
+  getRecepciones(page: Int!, size: Int!): RecepcionPage
+  getRecepcion(id: ID!): Recepcion!
+  getRecepcionByUser(cedula: String): Recepcion!
+  getAllRecepciones: [Recepcion]
+}
+
+extend type Mutation {
+  createRecepcion(numeroHabitacion: Int!, cedula:String! ,paqueteId: ID, fechaEntrada: String, fechaSalida: String, adelanto: Float ,descuento:Float, totalAPagar:Float,preferencias:String, observaciones:String,trxHash: String,tipo: String!): Recepcion!
+  deleteRecepcion(id: ID!): Boolean
+  updateRecepcion(id:ID!): Recepcion
+}

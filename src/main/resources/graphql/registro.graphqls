@@ -1,0 +1,31 @@
+#import "entitypage.graphqls"
+
+type Registro {
+  id: ID!
+  metodo: String!
+  trxHash: String!
+  fechaCreacion: String!       # Considera usar un formato ISO 8601 para las fechas
+  fechaModificacion: String!    # Lo mismo aquí
+}
+
+input NewRegistro {
+  metodo: String!
+  trxHash: String!
+}
+
+input UpdatedRegistro {
+  id: ID!
+  metodo: String
+  trxHash: String
+}
+
+extend type Query {
+  getRegistros(page: Int!, size: Int!): RegistroPage
+  getRegistro(id: ID!): Registro!
+}
+
+extend type Mutation {
+  createRegistro(registro: NewRegistro!): Registro!
+  updateRegistro(registro: UpdatedRegistro!): Registro!
+  deleteRegistro(id: ID!): Boolean
+}

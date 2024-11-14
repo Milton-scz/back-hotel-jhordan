@@ -1,0 +1,9 @@
+type PageInfo {
+  totalPaginas: Int!
+  totalElementos: Int!
+  paginaActual: Int!
+  pageSize: Int!
+}
+
+
+

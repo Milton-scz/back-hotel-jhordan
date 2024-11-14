@@ -1,0 +1,54 @@
+#import "entitypage.graphqls"
+
+enum Role {
+  CLIENTE
+  EMPLEADO
+  ADMINISTRADOR
+}
+
+
+type User{
+  id:ID!
+  name: String!
+  cedula: String!
+  telefono: String
+  direccion: String
+  email: String!
+  password: String
+  role: String!
+
+}
+
+input NewUser {
+  name: String!
+  cedula: String!
+  telefono: String
+  direccion: String
+  email: String!
+  password: String!
+  role: Role = CLIENTE
+}
+
+input UpdatedUser {
+  id: ID!
+  name: String
+  cedula: String!
+  telefono: String
+  direccion: String
+  email: String
+  password: String
+  role: Role
+}
+
+type Query {
+  getUsers(page: Int!, size: Int!):UserPage
+  getUser(email: String!): User!
+   getAllUsers: [User]
+}
+
+type Mutation {
+  createUser(user: NewUser!): User!
+  login(email: String!, password: String!): String!
+  updateUser(user: UpdatedUser!): User!
+  deleteUser(id: ID!): Boolean
+}

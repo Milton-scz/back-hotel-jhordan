@@ -1,0 +1,50 @@
+#import "entitypage.graphqls"
+
+
+
+
+type Device{
+  id:ID!
+  uuid: String!
+  nombre: String!
+  tipo: String!
+  descripcion: String
+  status: String
+  ocupadoDisponible : OcupadoDisponible
+
+}
+
+input NewDevice {
+  uuid: String!
+  nombre: String!
+  tipo: String!
+  descripcion: String
+   status: String
+   ocupadoDisponible: OcupadoDisponible
+}
+
+input UpdatedDevice {
+  id: ID!
+ uuid: String!
+  nombre: String!
+  tipo: String!
+  descripcion: String
+  status: String
+}
+
+
+enum OcupadoDisponible {
+  DISPONIBLE
+  OCUPADO
+}
+extend type Query {
+  getDevices(page: Int!, size: Int!):DevicePage
+  getDevice(Id: ID!): Device!
+  getAllDevices: [Device]
+}
+
+extend type Mutation {
+  createDevice(device: NewDevice!): Device!
+  updateDevice(device: UpdatedDevice!): Device!
+  deleteDevice(id: ID!): Boolean
+}

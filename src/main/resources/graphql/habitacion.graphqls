@@ -1,0 +1,75 @@
+#import "entitypage.graphqls"
+#import "device.graphqls"
+
+type Habitacion {
+  id: ID!
+  numeroHabitacion: Int!
+  capacidad: Int!
+  detalles: String
+  precioPorNoche: Float!
+  estado: Status!
+  tipo: Tipo!
+  device: Device
+}
+
+input InputDevice {
+  id: ID!
+  uuid: String!
+  nombre: String!
+  tipo: String!
+  descripcion: String
+  status: String
+  ocupadoDisponible: OcupadoDisponible
+}
+
+
+
+input NewHabitacion {
+  numeroHabitacion: Int!
+  capacidad: Int!
+  detalles: String
+  precioPorNoche: Float!
+  estado: Status
+  tipo: Tipo!
+  device: InputDevice! 
+}
+
+
+input UpdatedHabitacion {
+  id: ID!
+  numeroHabitacion: Int
+  capacidad: Int
+  detalles: String
+  precioPorNoche: Float
+  estado: Status
+  tipo: Tipo
+  deviceId: ID 
+}
+
+
+extend type Query {
+  getHabitaciones(page: Int!, size: Int!): HabitacionPage 
+  getHabitacion(id: ID!): Habitacion!
+  getAllHabitaciones: [Habitacion]
+}
+
+
+extend type Mutation {
+  createHabitacion(habitacion: NewHabitacion!): Habitacion!
+  updateHabitacion(habitacion: UpdatedHabitacion!): Habitacion!
+  deleteHabitacion(id: ID!): Boolean
+}
+
+
+enum Status {
+  DISPONIBLE
+  RESERVADO
+  OCUPADO
+  MANTENIMIENTO
+}
+
+enum Tipo {
+  SIMPLE
+  DOBLE
+  SUITE
+}

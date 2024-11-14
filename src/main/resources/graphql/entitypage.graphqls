@@ -1,0 +1,38 @@
+#import "pageinfo.graphqls"
+
+type UserPage {
+  pageInfo: PageInfo!
+  items: [User!]!
+}
+
+
+type DevicePage {
+  pageInfo: PageInfo!
+  items: [Device!]!
+}
+
+type HabitacionPage {
+  pageInfo: PageInfo!
+  items: [Habitacion!]!
+}
+
+
+type RecepcionPage {
+  pageInfo: PageInfo!
+  items: [Recepcion!]!
+}
+
+
+type RegistroPage {
+  pageInfo: PageInfo!
+  items: [Registro!]!
+}
+
+type PaquetePage {
+  pageInfo: PageInfo!
+  items: [Paquete!]!
+}
+
+
+
+

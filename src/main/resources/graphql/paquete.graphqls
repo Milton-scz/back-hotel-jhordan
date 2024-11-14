@@ -1,0 +1,34 @@
+#import "entitypage.graphqls"
+
+type Paquete {
+  paqueteId: ID!
+  nombre: String!
+  precio: Float!
+  detalle: String!
+
+}
+
+input NewPaquete {
+nombre: String!
+  precio: Float!
+  detalle: String!
+}
+
+input UpdatedPaquete {
+  paqueteId: ID!
+  nombre:String!
+  precio: Float
+  detalle: String
+}
+
+extend type Query {
+  getPaquetes(page: Int!, size: Int!): PaquetePage
+  getPaquete(paqueteId: ID!): Paquete!
+  getAllPaquetes: [Paquete]
+}
+
+extend type Mutation {
+  createPaquete(paquete: NewPaquete!): Paquete!
+  updatePaquete(paquete: UpdatedPaquete!): Paquete!
+  deletePaquete(paqueteId: ID!): Boolean
+}
